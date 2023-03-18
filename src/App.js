@@ -5,56 +5,11 @@ import {
 } from 'react-bootstrap';
 import './App.css';
 import image1 from './img/bg.png';
+import {pdInfo1, pdInfo2, pdInfo3} from './data.js';
 
 function App() {
-
-  let [productTitle1] = useState([
-    {
-      name: "신발1",
-      describe: "편안한 스티커즈"
-    },
-    {
-      name: "신발2",
-      describe: "가벼운 런닝화"
-    },
-    {
-      name: "신발3",
-      describe: "스타일 에어"
-    }
-  ]);
-
-  let [productTitle2] = useState([
-    {
-      name: "신발4",
-      describe: "기능화"
-    },
-    {
-      name: "신발5",
-      describe: "패션화"
-    },
-    {
-      name: "신발6",
-      describe: "에어 조던"
-    }
-  ]);
-
-  let [productTitle3] = useState([
-    {
-      name: "신발7",
-      describe: "아름다운"
-    },
-    {
-      name: "신발8",
-      describe: "깔끔한"
-    },
-    {
-      name: "신발9",
-      describe: "여성전용"
-    }
-  ]);
-
   let [productLayout] = useState([
-    productTitle1, productTitle2, productTitle3
+    pdInfo1, pdInfo2, pdInfo3,
   ])
 
   console.log(productLayout);
@@ -80,12 +35,7 @@ function App() {
          <Row>
         {el.map ((pd, n) => {
         return (
-
-          <Col sm key= {n} style= {{ textAlign: "center" }}>
-          <img src= {'https://codingapple1.github.io/shop/shoes' + (n +1) + '.jpg'} width="80%" />
-          <h4>{pd.name}</h4>
-          <p>{pd.describe}</p>
-          </Col>
+          <PdCol key={n} pd= {pd} n= {n}></PdCol>
         )
         })
         }
@@ -99,5 +49,18 @@ function App() {
     </div>
   );
 }
+
+function PdCol (props) {
+  return(
+    <Col sm key= {props.n} style= {{ textAlign: "center" }}>
+    <img src= {'https://codingapple1.github.io/shop/shoes' + (props.n +1) + '.jpg'} width="80%" />
+    <h4>{props.pd.name}</h4>
+    <p>{props.pd.describe}</p>
+    <h5>{props.pd.price} ₩</h5>
+    </Col>
+  )
+}
+
+
 
 export default App;
