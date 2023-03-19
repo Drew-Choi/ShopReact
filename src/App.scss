@@ -13,3 +13,12 @@
   background-size: cover;
   background-position: center;
 }
+
+.nav_btn {
+  color: #b0b0b0;
+  text-decoration: none;
+  padding: 10px;
+  &:hover {
+    color: #ffffff;
+  }
+}

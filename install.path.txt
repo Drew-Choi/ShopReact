@@ -1,2 +1,18 @@
 npx create-react-app 프로젝트명
 npm i react-router-dom@6
+->index.js에서 추가로 작업해야함
+
+<BrowserRouter>
+<App />
+</BrowserRouter>
+
+이렇게 감싸줌
+
+그리고
+import { BrowserRouter } from "react-router-dom';
+이라고 임폴트 해야함
+
+그리고
+App.js에서
+import { Routes, Route, Link } from 'react-router-dom';
+로 컴포넌트를 임폴트 한다.

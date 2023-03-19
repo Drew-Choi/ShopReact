@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const app = express();
-const PORT = 4000;
+const PORT = 3000;
 
 app.use(cookieParser());
 app.use(
