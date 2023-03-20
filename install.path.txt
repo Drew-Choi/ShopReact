@@ -16,3 +16,6 @@ import { BrowserRouter } from "react-router-dom';
 App.js에서
 import { Routes, Route, Link } from 'react-router-dom';
 로 컴포넌트를 임폴트 한다.
+
+
+npm install styled-components

@@ -13,6 +13,7 @@ import Detail1 from './routes/detail1.js';
 
 function App() {
   let [pdInfosArr, pdInfosArrFunc] = useState(pdInfos);
+  let [turnSort, turnSortFunc] = useState('off');
   let navigate = useNavigate();
 
   return (
@@ -68,13 +69,25 @@ function App() {
                   variant="dark"
                   className="orderBtn"
                   onClick={() => {
-                    pdInfosArrFunc([
-                      ...pdInfosArr.sort((a, b) => {
-                        if (a.name > b.name) return 1;
-                        if (a.name < b.name) return -1;
-                        if (a.name < b.name) return 0;
-                      }),
-                    ]);
+                    if (turnSort === 'off') {
+                      turnSortFunc('on');
+                      pdInfosArrFunc([
+                        ...pdInfosArr.sort((a, b) => {
+                          if (a.name > b.name) return 1;
+                          if (a.name < b.name) return -1;
+                          if (a.name === b.name) return 0;
+                        }),
+                      ]);
+                    } else {
+                      turnSortFunc('off');
+                      pdInfosArrFunc([
+                        ...pdInfosArr.sort((a, b) => {
+                          if (a.PK > b.PK) return 1;
+                          if (a.PK < b.PK) return -1;
+                          if (a.PK === b.PK) return 0;
+                        }),
+                      ]);
+                    }
                   }}
                 >
                   가나다순 정렬

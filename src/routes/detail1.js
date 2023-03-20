@@ -1,6 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 
 import { useParams, Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+let YellowBtn = styled.button`
+  background: yellow;
+  color: black;
+  padding: 10px;
+`;
 
 function Detail1(props) {
   let { id } = useParams();
@@ -9,6 +16,7 @@ function Detail1(props) {
     console.log(idFinder);
     return (
       <div className="container">
+        <YellowBtn>버튼</YellowBtn>
         <div className="row">
           <div className="col-md-6">
             <img

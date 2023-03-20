@@ -25,7 +25,7 @@ let pdInfos = [
     price: '200,000',
   },
   {
-    id: 5,
+    PK: 5,
     name: '반스-PinkChecker',
     describe: '패션화',
     price: '50,000',
