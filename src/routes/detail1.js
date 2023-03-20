@@ -5,30 +5,25 @@ import { useParams, Link } from 'react-router-dom';
 function Detail1(props) {
   let { id } = useParams();
   if (id <= props.pdInfos.length && id > 0) {
+    let idFinder = props.pdInfos.find((e) => e.PK === Number(id));
+    console.log(idFinder);
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6">
-            {id > 7 ? (
-              <img
-                src={
-                  'https://codingapple1.github.io/shop/shoes' +
-                  (id - 7) +
-                  '.jpg'
-                }
-                width="100%"
-              />
-            ) : (
-              <img
-                src={'https://codingapple1.github.io/shop/shoes' + id + '.jpg'}
-                width="100%"
-              />
-            )}
+            <img
+              src={
+                'https://codingapple1.github.io/shop/shoes' +
+                idFinder.PK +
+                '.jpg'
+              }
+              width="100%"
+            />
           </div>
           <div className="col-md-6">
-            <h4 className="pt-5">{props.pdInfos[id - 1].name}</h4>
-            <p>{props.pdInfos[id - 1].describe}</p>
-            <p>{props.pdInfos[id - 1].price} ₩ </p>
+            <h4 className="pt-5">{idFinder.name}</h4>
+            <p>{idFinder.describe}</p>
+            <p>{idFinder.price} ₩ </p>
             <button className="btn btn-danger">주문하기</button>
           </div>
         </div>

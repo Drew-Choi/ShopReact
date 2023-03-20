@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
@@ -6,16 +7,12 @@ import { useState } from 'react';
 import { Navbar, Container, Nav, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import image1 from './img/bg.png';
-import { pdInfo1, pdInfo2, pdInfo3 } from './data.js';
+import pdInfos from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Detail1 from './routes/detail1.js';
 
 function App() {
-  let [productLayout, productLayoutFunc] = useState([
-    pdInfo1,
-    pdInfo2,
-    pdInfo3,
-  ]);
+  let [pdInfosArr, pdInfosArrFunc] = useState(pdInfos);
   let navigate = useNavigate();
 
   return (
@@ -67,22 +64,52 @@ function App() {
                 style={{ backgroundImage: `url(${image1})` }}
               ></div>
               <div className="orderBtnWrap">
-                <Button variant="dark" className="orderBtn">
+                <Button
+                  variant="dark"
+                  className="orderBtn"
+                  onClick={() => {
+                    pdInfosArrFunc([
+                      ...pdInfosArr.sort((a, b) => {
+                        if (a.name > b.name) return 1;
+                        if (a.name < b.name) return -1;
+                        if (a.name < b.name) return 0;
+                      }),
+                    ]);
+                  }}
+                >
                   가나다순 정렬
                 </Button>
               </div>
 
-              {productLayout.map((el, num) => {
-                return (
-                  <Container key={num}>
-                    <Row>
-                      {el.map((pd, n) => {
-                        return <PdCol key={n} pd={pd} n={n}></PdCol>;
-                      })}
-                    </Row>
-                  </Container>
-                );
-              })}
+              <Container>
+                <Row>
+                  {pdInfosArr.map((el, num) => {
+                    if (num < 3 && num >= 0) {
+                      return <PdCol n={num} pd={el}></PdCol>;
+                    }
+                  })}
+                </Row>
+              </Container>
+
+              <Container>
+                <Row>
+                  {pdInfosArr.map((el, num) => {
+                    if (num < 6 && num >= 3) {
+                      return <PdCol n={num} pd={el}></PdCol>;
+                    }
+                  })}
+                </Row>
+              </Container>
+
+              <Container>
+                <Row>
+                  {pdInfosArr.map((el, num) => {
+                    if (num < 9 && num >= 6) {
+                      return <PdCol n={num} pd={el}></PdCol>;
+                    }
+                  })}
+                </Row>
+              </Container>
             </>
           }
         />
@@ -90,9 +117,7 @@ function App() {
         {/* 디테일영역 */}
         <Route
           path="/detail1/:id"
-          element={
-            <Detail1 pdInfos={[...pdInfo1, ...pdInfo2, ...pdInfo3]}></Detail1>
-          }
+          element={<Detail1 pdInfos={pdInfosArr}></Detail1>}
         />
 
         <Route
@@ -148,9 +173,7 @@ function PdCol(props) {
   return (
     <Col sm key={props.n} style={{ textAlign: 'center' }}>
       <img
-        src={
-          'https://codingapple1.github.io/shop/shoes' + (props.n + 1) + '.jpg'
-        }
+        src={'https://codingapple1.github.io/shop/shoes' + props.pd.PK + '.jpg'}
         width="80%"
       />
       <h4>{props.pd.name}</h4>
