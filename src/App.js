@@ -3,7 +3,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/alt-text */
 import { useState } from 'react';
-import { Navbar, Container, Nav, Row, Col } from 'react-bootstrap';
+import { Navbar, Container, Nav, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import image1 from './img/bg.png';
 import { pdInfo1, pdInfo2, pdInfo3 } from './data.js';
@@ -11,7 +11,11 @@ import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Detail1 from './routes/detail1.js';
 
 function App() {
-  let [productLayout] = useState([pdInfo1, pdInfo2, pdInfo3]);
+  let [productLayout, productLayoutFunc] = useState([
+    pdInfo1,
+    pdInfo2,
+    pdInfo3,
+  ]);
   let navigate = useNavigate();
 
   return (
@@ -53,6 +57,7 @@ function App() {
       </Navbar>
 
       <Routes>
+        {/* 메인화면 */}
         <Route
           path="/"
           element={
@@ -61,6 +66,11 @@ function App() {
                 className="main-bg"
                 style={{ backgroundImage: `url(${image1})` }}
               ></div>
+              <div className="orderBtnWrap">
+                <Button variant="dark" className="orderBtn">
+                  가나다순 정렬
+                </Button>
+              </div>
 
               {productLayout.map((el, num) => {
                 return (

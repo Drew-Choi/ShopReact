@@ -39,3 +39,11 @@
     text-decoration: underline;
   }
 }
+
+.orderBtnWrap {
+  display: flex;
+  justify-content: right;
+  .orderBtn {
+    margin: 10px;
+  }
+}

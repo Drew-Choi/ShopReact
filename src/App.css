@@ -37,4 +37,12 @@
 .return:hover {
   color: blue;
   text-decoration: underline;
+}
+
+.orderBtnWrap {
+  display: flex;
+  justify-content: right;
+}
+.orderBtnWrap .orderBtn {
+  margin: 10px;
 }/*# sourceMappingURL=App.css.map */
