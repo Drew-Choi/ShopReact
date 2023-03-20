@@ -76,7 +76,15 @@ function App() {
             </>
           }
         />
-        <Route path="/detail1" element={<Detail1></Detail1>} />
+
+        {/* 디테일영역 */}
+        <Route
+          path="/detail1/:id"
+          element={
+            <Detail1 pdInfos={[...pdInfo1, ...pdInfo2, ...pdInfo3]}></Detail1>
+          }
+        />
+
         <Route
           path="*"
           element={
