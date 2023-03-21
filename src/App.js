@@ -98,7 +98,7 @@ function App() {
                 <Row>
                   {pdInfosArr.map((el, num) => {
                     if (num < 3 && num >= 0) {
-                      return <PdCol n={num} pd={el}></PdCol>;
+                      return <PdCol key={num} n={num} pd={el}></PdCol>;
                     }
                   })}
                 </Row>
@@ -108,7 +108,7 @@ function App() {
                 <Row>
                   {pdInfosArr.map((el, num) => {
                     if (num < 6 && num >= 3) {
-                      return <PdCol n={num} pd={el}></PdCol>;
+                      return <PdCol key={num} n={num} pd={el}></PdCol>;
                     }
                   })}
                 </Row>
@@ -118,7 +118,7 @@ function App() {
                 <Row>
                   {pdInfosArr.map((el, num) => {
                     if (num < 9 && num >= 6) {
-                      return <PdCol n={num} pd={el}></PdCol>;
+                      return <PdCol key={num} n={num} pd={el}></PdCol>;
                     }
                   })}
                 </Row>
