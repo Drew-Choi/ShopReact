@@ -10,6 +10,7 @@ import image1 from './img/bg.png';
 import pdInfos from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Detail1 from './routes/detail1.js';
+import axios from 'axios';
 
 function App() {
   let [pdInfosArr, pdInfosArrFunc] = useState(pdInfos);
@@ -123,6 +124,45 @@ function App() {
                   })}
                 </Row>
               </Container>
+
+              <Container>
+                <Row>
+                  {pdInfosArr.map((el, num) => {
+                    if (num < 12 && num >= 9) {
+                      return <PdCol key={num} n={num} pd={el}></PdCol>;
+                    }
+                  })}
+                </Row>
+              </Container>
+              <button
+                onClick={async () => {
+                  try {
+                    const result = await axios.get(
+                      'https://codingapple1.github.io/shop/data2.json',
+                    );
+                    const pdinfo = result.data;
+                    console.log(pdinfo);
+                    const copy = [...pdInfosArr];
+
+                    pdinfo.map((el, num) => {
+                      const newPd = {
+                        PK: pdinfo[num].id + 1,
+                        name: pdinfo[num].title,
+                        describe: pdinfo[num].content,
+                        price: pdinfo[num].price,
+                      };
+                      copy.push(newPd);
+                    });
+                    console.log(copy);
+                    pdInfosArrFunc(copy);
+                  } catch (err) {
+                    console.error(err);
+                    console.log('실패');
+                  }
+                }}
+              >
+                버튼
+              </button>
             </>
           }
         />
@@ -164,6 +204,9 @@ function App() {
   );
 }
 
+//컴포넌트 모음
+
+//about페이지 컴포넌트
 function About() {
   return (
     <div>
@@ -173,6 +216,7 @@ function About() {
   );
 }
 
+//event페이지 컴포넌트
 function EventPage() {
   return (
     <div>
@@ -182,6 +226,7 @@ function EventPage() {
   );
 }
 
+//메인페이지 행 반복용 컴포넌트
 function PdCol(props) {
   return (
     <Col sm key={props.n} style={{ textAlign: 'center' }}>

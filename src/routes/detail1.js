@@ -33,7 +33,7 @@ function Detail1(props) {
       // useEffect 로드 전에 기존타이머는 제거해주세요~~
       clearTimeout(timer);
     };
-  });
+  }, []);
   //이렇게 리턴도 줄 수 있음.
   //return에 들어간 기능은 useEffect 동작 전에 실행되는 것
   //ex) clean up function 사용할때 쓰임
