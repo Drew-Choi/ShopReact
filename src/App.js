@@ -16,6 +16,8 @@ function App() {
   let [pdInfosArr, pdInfosArrFunc] = useState(pdInfos);
   let [turnSort, turnSortFunc] = useState('off');
   let navigate = useNavigate();
+  let [mainChartBtn, setMainChartBtn] = useState(1);
+  console.log(mainChartBtn);
 
   return (
     <div className="App">
@@ -94,7 +96,6 @@ function App() {
                   가나다순 정렬
                 </Button>
               </div>
-
               <Container>
                 <Row>
                   {pdInfosArr.map((el, num) => {
@@ -104,7 +105,6 @@ function App() {
                   })}
                 </Row>
               </Container>
-
               <Container>
                 <Row>
                   {pdInfosArr.map((el, num) => {
@@ -114,7 +114,6 @@ function App() {
                   })}
                 </Row>
               </Container>
-
               <Container>
                 <Row>
                   {pdInfosArr.map((el, num) => {
@@ -124,7 +123,6 @@ function App() {
                   })}
                 </Row>
               </Container>
-
               <Container>
                 <Row>
                   {pdInfosArr.map((el, num) => {
@@ -135,34 +133,69 @@ function App() {
                 </Row>
               </Container>
               <button
+                //중요: axios와 fetch의 차이
+                //axios는 외부라이브러리로 json형태를 모두 object와 array로 변환해줌
+                //그러나 fetch는 json그대로 받아오기 때문에 array나 obj으로의 변환이 필요함.
+                //fetch변환 코드 -> .then(result => result.json()) .then(data => {})
+                // + 복수 요청 보낼때, Promise.all( [axios.get('URL1'), axios.get('URL2')] .then() 프로미스문법 )
                 onClick={async () => {
-                  try {
-                    const result = await axios.get(
-                      'https://codingapple1.github.io/shop/data2.json',
-                    );
-                    const pdinfo = result.data;
-                    console.log(pdinfo);
-                    const copy = [...pdInfosArr];
+                  setMainChartBtn(mainChartBtn + 1);
 
-                    pdinfo.map((el, num) => {
-                      const newPd = {
-                        PK: pdinfo[num].id + 1,
-                        name: pdinfo[num].title,
-                        describe: pdinfo[num].content,
-                        price: pdinfo[num].price,
-                      };
-                      copy.push(newPd);
-                    });
-                    console.log(copy);
-                    pdInfosArrFunc(copy);
-                  } catch (err) {
-                    console.error(err);
-                    console.log('실패');
+                  if (mainChartBtn === 1) {
+                    try {
+                      const result = await axios.get(
+                        'https://codingapple1.github.io/shop/data2.json',
+                      );
+                      const pdinfo = result.data;
+                      console.log(pdinfo);
+                      const copy = [...pdInfosArr];
+
+                      pdinfo.map((el, num) => {
+                        const newPd = {
+                          PK: pdinfo[num].id + 1,
+                          name: pdinfo[num].title,
+                          describe: pdinfo[num].content,
+                          price: pdinfo[num].price,
+                        };
+                        copy.push(newPd);
+                      });
+                      console.log(copy);
+                      pdInfosArrFunc(copy);
+                    } catch (err) {
+                      console.error(err);
+                      console.log('실패');
+                    }
+                  }
+                  if (mainChartBtn === 2) {
+                    try {
+                      const result = await axios.get(
+                        'https://codingapple1.github.io/shop/data3.json',
+                      );
+                      const pdinfo = result.data;
+                      console.log(pdinfo);
+                      const copy = [...pdInfosArr];
+
+                      pdinfo.map((el, num) => {
+                        const newPd = {
+                          PK: pdinfo[num].id + 1,
+                          name: pdinfo[num].title,
+                          describe: pdinfo[num].content,
+                          price: pdinfo[num].price,
+                        };
+                        copy.push(newPd);
+                      });
+                      console.log(copy);
+                      pdInfosArrFunc(copy);
+                    } catch (err) {
+                      console.error(err);
+                      console.log('실패');
+                    }
                   }
                 }}
               >
                 버튼
               </button>
+              {mainChartBtn}
             </>
           }
         />
