@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/alt-text */
 
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 //스타일드 컴퍼넌트 활용 코드
 // import styled from 'styled-components';
@@ -15,6 +17,8 @@ import { useParams, Link } from 'react-router-dom';
 function Detail1(props) {
   let [eventSecond, setEventSecond] = useState('on');
   let [count, setCount] = useState(0);
+  let [tab, setTab] = useState(0);
+  let [fade2, setFade2] = useState('');
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -42,9 +46,20 @@ function Detail1(props) {
   if (id <= props.pdInfos.length && id > 0) {
     let idFinder = props.pdInfos.find((e) => e.PK === Number(id));
 
+    useEffect(() => {
+      let fadeTime = setTimeout(() => {
+        setFade2('end');
+      }, 10);
+
+      return () => {
+        clearTimeout(fadeTime);
+        setFade2('');
+      };
+    }, []);
+
     //HTML쪽으로 리턴하는 것
     return (
-      <div className="container">
+      <div className={'container start ' + fade2}>
         {eventSecond === 'on' ? (
           <div className="alert alert-warning">3초이내 구매시 할인</div>
         ) : null}
@@ -76,6 +91,41 @@ function Detail1(props) {
             <button className="btn btn-danger">주문하기</button>
           </div>
         </div>
+
+        <Nav variant="tabs" defaultActiveKey="link0">
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                setTab(0);
+              }}
+              eventKey="link0"
+            >
+              버튼0
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                setTab(1);
+              }}
+              eventKey="link1"
+            >
+              버튼1
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                setTab(2);
+              }}
+              eventKey="link2"
+            >
+              버튼2
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+
+        <TabContent tab={tab}></TabContent>
       </div>
     );
   } else {
@@ -87,6 +137,26 @@ function Detail1(props) {
       </>
     );
   }
+}
+
+function TabContent({ tab }) {
+  let [fade, setFade] = useState('');
+
+  useEffect(() => {
+    let times = setTimeout(() => {
+      setFade('end');
+    }, 10);
+    return () => {
+      clearTimeout(times);
+      setFade('');
+    };
+  }, [tab]);
+
+  return (
+    <div className={`start ${fade}`}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+    </div>
+  );
 }
 
 export default Detail1;
