@@ -19,3 +19,37 @@ import { Routes, Route, Link } from 'react-router-dom';
 
 
 npm install styled-components
+
+
+-----
+
+redux!!!
+리덕스 설치
+npm i @reduxjs/toolkit react-redux
+주의) react와 react-dom 18.1.x 버젼 이상이어야 함.
+
+리덕스 세팅
+src 폴더 안에 store.js 파일 만들어 state를 담을 공간을 세팅해줌
+import { configureStore } from '@reduxjs/toolkit'
+
+export default configureStore({
+  reducer: {  }
+})
+이렇게 세팅
+
+그리고 index.js 파일로 가서 ->>>
+import { Provider } from "react-redux";
+import store from './store.js'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);
+
+이렇게 세팅해줌

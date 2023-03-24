@@ -11,13 +11,17 @@ import pdInfos from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Detail1 from './routes/detail1.js';
 import axios from 'axios';
+import Cart from './routes/Cart';
+
+//ContextAPI 만들기 1.
+// export let Context1 = createContext();
 
 function App() {
   let [pdInfosArr, pdInfosArrFunc] = useState(pdInfos);
   let [turnSort, turnSortFunc] = useState('off');
   let navigate = useNavigate();
   let [mainChartBtn, setMainChartBtn] = useState(1);
-  console.log(mainChartBtn);
+  let [재고] = useState([10, 11, 12]);
 
   return (
     <div className="App">
@@ -203,8 +207,13 @@ function App() {
         {/* 디테일영역 */}
         <Route
           path="/detail1/:id"
-          element={<Detail1 pdInfos={pdInfosArr}></Detail1>}
+          element={
+            //ContextAPI 만들기 2. 공유하고 싶은 state를 value에 넣어준다.
+            <Detail1 pdInfos={pdInfosArr}></Detail1>
+          }
         />
+
+        <Route path="/cart" element={<Cart />} />
 
         <Route
           path="*"

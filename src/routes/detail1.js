@@ -4,6 +4,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
+//ContextAPI 만들기 3.임폴트하기
+// import { Context1 } from '../App.js';
 
 //스타일드 컴퍼넌트 활용 코드
 // import styled from 'styled-components';
@@ -15,6 +17,11 @@ import { Nav } from 'react-bootstrap';
 // `;
 
 function Detail1(props) {
+  //ContextAPI 만들기 3. 쓰고 싶은 컴포넌트에서 임폴트하기
+  //구조분해할당도 가능
+  // let { 재고, pdInfosArr } = useContext(Context1);
+  // let appStateArr = useContext(Context1);
+
   let [eventSecond, setEventSecond] = useState('on');
   let [count, setCount] = useState(0);
   let [tab, setTab] = useState(0);
@@ -63,7 +70,7 @@ function Detail1(props) {
         {eventSecond === 'on' ? (
           <div className="alert alert-warning">3초이내 구매시 할인</div>
         ) : null}
-        {count}
+
         <button
           onClick={() => {
             setCount(count + 1);
@@ -141,6 +148,8 @@ function Detail1(props) {
 
 function TabContent({ tab }) {
   let [fade, setFade] = useState('');
+  //ContextAPI는 사용하는 컴퍼넌트마다 useContext를 적용해줘야함
+  // let { 재고, pdInfosArr } = useContext(Context1);
 
   useEffect(() => {
     let times = setTimeout(() => {
