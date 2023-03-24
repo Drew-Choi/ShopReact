@@ -53,3 +53,15 @@ root.render(
 );
 
 이렇게 세팅해줌
+그리고 store.js에서 createSlice({})함수 불러서 이 안에 state를 만들어줌
+createSlice는 임폴트 해야함
+ex)
+let user = createSlice({
+  name : 'state이름~~~~'
+  initialState : '값'
+})
+
+값 입력 후 reducer 에 user라는 변수로 등록하는데 형식은 아래와 같음
+작명: user.reducer
+
+쓰고 싶은 곳에서 useSelector((state) => { return state })로 가져옴
