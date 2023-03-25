@@ -65,3 +65,4 @@ let user = createSlice({
 작명: user.reducer
 
 쓰고 싶은 곳에서 useSelector((state) => { return state })로 가져옴
+중괄호와 return은 생략 가능

@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 function Cart() {
 
-  let redux1 = useSelector((state) => { return state })
-  console.log(redux1.user);
+  let redux = useSelector((state) => state );
+  let cartData = redux.cartData;
 
   return (
     <div>
@@ -18,12 +18,18 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>안녕</td>
-            <td>안녕</td>
-            <td>안녕</td>
-          </tr>
+          {
+            cartData.map((el) => {
+            return (
+            <tr>
+              <td>{el.id}</td>
+              <td>{el.name}</td>
+              <td>{el.count}</td>
+              <td>안녕</td>
+            </tr>
+             )
+           })
+          }
         </tbody>
       </Table> 
     </div>
