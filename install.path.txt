@@ -23,7 +23,7 @@ npm install styled-components
 
 -----
 
-redux!!!
+redux!!! (세팅이 꾀나 어려우니 주의해서 볼 것)
 리덕스 설치
 npm i @reduxjs/toolkit react-redux
 주의) react와 react-dom 18.1.x 버젼 이상이어야 함.
@@ -66,3 +66,33 @@ let user = createSlice({
 
 쓰고 싶은 곳에서 useSelector((state) => { return state })로 가져옴
 중괄호와 return은 생략 가능
+
+
+state변경(개어려움 어쩔 수 없음)
+1. let user = createSlice({
+  name: 'user',
+  initialState: ['kim', 'park'],
+  //리덕스에서 stat변경 방법 스텝 1. reducers키를 만들어라
+  //그리고 그 안에 작명하고 함수 하나 만들어라
+  reducers: {
+    setUser(state) {
+      return ['john', state];
+      //만약 바꿔치기가 아닌 추가로 하고 싶으면 setUser(state){}
+      //이렇게 매개변수 안에 state를 넣어주고 return ['john kim' + state] 이렇게 해준다.
+      //state매개변수는 기존 ['kim', 'park']을 유지한 것이고, 거기에 새로운 'john kim'을 넣어주는 것이다.
+    },
+  },
+});
+
+2. store.js 에서 변경함수를
+//setUser를 밖으로 빼내기, 구조분해할당으로 빼줌
+export let { setUser } = user.actions;
+
+3. dispatch(state변경함수());로 실행해주기
+ex)원하는 곳에서
+<td><button onClick={() => {
+  //useDispatch를 사용해서 변수에 담고
+  //그 함수에 store에서 불러낸 setUser를 담아준다.
+  //그래야 setUser를 사용 할 수 있다.
+  dispatch(setUser())
+}}>+</button></td>
