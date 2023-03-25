@@ -4,6 +4,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { pushCartData } from '../store/cartDataSlice';
+import Cart from './Cart';
 //ContextAPI 만들기 3.임폴트하기
 // import { Context1 } from '../App.js';
 
@@ -17,6 +20,9 @@ import { Nav } from 'react-bootstrap';
 // `;
 
 function Detail1(props) {
+  let state = useSelector((state) => state);
+  let dispatch = useDispatch();
+  let cartData = state.cartData;
   //ContextAPI 만들기 3. 쓰고 싶은 컴포넌트에서 임폴트하기
   //구조분해할당도 가능
   // let { 재고, pdInfosArr } = useContext(Context1);
@@ -95,7 +101,18 @@ function Detail1(props) {
             <h4 className="pt-5">{idFinder.name}</h4>
             <p>{idFinder.describe}</p>
             <p>{idFinder.price} ₩ </p>
-            <button className="btn btn-danger">주문하기</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                let newCartData = {
+                  id: cartData.length + 1,
+                  name: idFinder.name,
+                  count: 1,
+                };
+              }}
+            >
+              주문하기
+            </button>
           </div>
         </div>
 
@@ -163,7 +180,15 @@ function TabContent({ tab }) {
 
   return (
     <div className={`start ${fade}`}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+      {
+        [
+          <div>
+            <Cart />
+          </div>,
+          <div>내용1</div>,
+          <div>내용2</div>,
+        ][tab]
+      }
     </div>
   );
 }

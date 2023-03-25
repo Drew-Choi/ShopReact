@@ -1,6 +1,7 @@
 import { Table } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux";
-import { setUserName, setUserAge } from "../store";
+import { setUserName, setUserAge } from "../store/userSlice.js";
+import { setAddCount, setMinorCount } from "../store/cartDataSlice";
 
 function Cart() {
 
@@ -16,8 +17,16 @@ function Cart() {
         //useDispatch를 사용해서 변수에 담고
         //그 함수에 store에서 불러낸 setUser를 담아준다.
         //그래야 setUser를 사용 할 수 있다.
-        dispatch(setUserAge())
-      }}>나이 올리기</button>
+        dispatch(setUserAge(1))
+      }}>나이 +1 올리기</button>
+
+      <button onClick={() => {
+        //useDispatch를 사용해서 변수에 담고
+        //그 함수에 store에서 불러낸 setUser를 담아준다.
+        //그래야 setUser를 사용 할 수 있다.
+        dispatch(setUserAge(5))
+      }}>나이 +5 올리기</button>
+
       <button onClick={() => {
         //useDispatch를 사용해서 변수에 담고
         //그 함수에 store에서 불러낸 setUser를 담아준다.
@@ -37,12 +46,21 @@ function Cart() {
         <tbody>
           {
             cartData.map((el, num) => 
-             
+            cartData[num].count === 0 ? 
+            null
+            :
             <tr key={num}>
               <td>{el.id}</td>
               <td>{el.name}</td>
               <td>{el.count}</td>
-              <td><button>+</button></td>
+              <td>
+                <button onClick={()=> {
+                  dispatch(setAddCount(num))
+                }}>+</button>
+                <button onClick={()=> {
+                  dispatch(setMinorCount(num))
+                }}>-</button>
+              </td>
             </tr>
              
            )
