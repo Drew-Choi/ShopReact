@@ -46,7 +46,7 @@ function Cart() {
         <tbody>
           {
             cartData.map((el, num) => 
-            cartData[num].count === 0 ? 
+            cartData[num].count <= 0 ?
             null
             :
             <tr key={num}>
@@ -62,9 +62,9 @@ function Cart() {
                 }}>-</button>
               </td>
             </tr>
-             
            )
           }
+          
         </tbody>
       </Table> 
     </div>

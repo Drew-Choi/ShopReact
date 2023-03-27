@@ -12,6 +12,9 @@ let cartData = createSlice({
     },
     setMinorCount(state, action) {
       state[action.payload].count -= 1;
+      if (state[action.payload].count <= 0) {
+        state.splice(action.payload);
+      }
     },
     pushCartData(state, action) {
       state.push(action.payload);
