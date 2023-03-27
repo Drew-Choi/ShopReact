@@ -50,15 +50,15 @@ function Cart() {
             null
             :
             <tr key={num}>
-              <td>{el.id}</td>
+              <td>{el.PK}</td>
               <td>{el.name}</td>
               <td>{el.count}</td>
               <td>
                 <button onClick={()=> {
-                  dispatch(setAddCount(num))
+                  dispatch(setAddCount(cartData[num].PK))
                 }}>+</button>
                 <button onClick={()=> {
-                  dispatch(setMinorCount(num))
+                  dispatch(setMinorCount(cartData[num].PK))
                 }}>-</button>
               </td>
             </tr>
