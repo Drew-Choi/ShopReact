@@ -105,17 +105,15 @@ function Detail1(props) {
               className="btn btn-danger"
               onClick={() => {
                 let newCartData = {
-                  id: cartData.length + 1,
+                  PK: cartData.length + 1,
                   name: idFinder.name,
                   count: 1,
                 };
                 //중복여부 체크 filter 함수 사용하여 중복되는 것이 몇개 있는지 체크
-                if (
-                  cartData.filter((el) => {
-                    return el.name === newCartData.name;
-                  }).length < 1
-                )
-                  dispatch(pushCartData(newCartData));
+                let check = cartData.filter((el) => {
+                  return el.name === newCartData.name;
+                }).length;
+                if (check === 0) dispatch(pushCartData(newCartData));
               }}
             >
               주문하기

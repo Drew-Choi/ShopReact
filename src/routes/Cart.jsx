@@ -46,9 +46,6 @@ function Cart() {
         <tbody>
           {
             cartData.map((el, num) => 
-            cartData[num].count <= 0 ?
-            null
-            :
             <tr key={num}>
               <td>{el.PK}</td>
               <td>{el.name}</td>

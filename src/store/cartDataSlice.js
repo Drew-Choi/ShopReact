@@ -18,9 +18,11 @@ let cartData = createSlice({
         return el.PK === action.payload;
       });
 
-      state[elIndexFinder].count <= 0
-        ? state.splice(elIndexFinder)
-        : (state[elIndexFinder].count -= 1);
+      state[elIndexFinder].count -= 1;
+
+      if (state[elIndexFinder].count === 0) {
+        state.splice(elIndexFinder, 1);
+      }
     },
     pushCartData(state, action) {
       state.push(action.payload);
