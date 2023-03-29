@@ -12,6 +12,8 @@ import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Detail1 from './routes/detail1.js';
 import axios from 'axios';
 import Cart from './routes/Cart';
+import RecentPd from './components/RecentPd';
+import { useQuery } from 'react-query';
 
 //ContextAPI 만들기 1.
 // export let Context1 = createContext();
@@ -22,6 +24,20 @@ function App() {
   let navigate = useNavigate();
   let [mainChartBtn, setMainChartBtn] = useState(1);
   let [재고] = useState([10, 11, 12]);
+
+  let result = useQuery('data', () => {
+    return (
+      axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
+        return a.data;
+      }),
+      //refetch 기능을 2초 간격으로 주는 것
+      { staleTime: 2000 }
+    );
+  });
+  //useQuery좋은점
+  //result.data (가져온 데이터 정보)
+  //result.isLoading (로딩중일때)
+  //result.error (에러날때)
 
   return (
     <div className="App">
@@ -57,6 +73,9 @@ function App() {
             >
               about
             </Nav.Link>
+            <Nav.Link style={{ position: 'absolute', right: '20px' }}>
+              {result.isLoading ? '로딩 중' : result.data.name}
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -67,6 +86,7 @@ function App() {
           path="/"
           element={
             <>
+              <RecentPd />
               <div
                 className="main-bg"
                 style={{ backgroundImage: `url(${image1})` }}

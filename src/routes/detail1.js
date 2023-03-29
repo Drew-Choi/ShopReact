@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, json } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { pushCartData } from '../store/cartDataSlice';
@@ -60,6 +60,11 @@ function Detail1(props) {
     let idFinder = props.pdInfos.find((e) => e.PK === Number(id));
 
     useEffect(() => {
+      let idFinderStingify = JSON.stringify(idFinder);
+      localStorage.setItem(idFinder.PK, idFinderStingify);
+    }, []);
+
+    useEffect(() => {
       let fadeTime = setTimeout(() => {
         setFade2('end');
       }, 10);
@@ -69,7 +74,6 @@ function Detail1(props) {
         setFade2('');
       };
     }, []);
-
     //HTML쪽으로 리턴하는 것
     return (
       <div className={'container start ' + fade2}>
