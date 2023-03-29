@@ -5,13 +5,13 @@ export default function RecentPd() {
 
   const [recentArr] = useState([])
 
-    for(let i = 0; i < localStorage.length; i += 1){
-      let localFindKey = localStorage.key(i);
-      let localGetItem = localStorage.getItem(localFindKey);
-      let localGetItemParse = JSON.parse(localGetItem);
-      recentArr.push(localGetItemParse);
-      
-    }
+  for(let i = 0; i < localStorage.length; i += 1){
+    let localFindKey = localStorage.key(i);
+    let localGetItem = localStorage.getItem(localFindKey);
+    let localGetItemParse = JSON.parse(localGetItem);
+    recentArr.push(localGetItemParse);
+    
+  }
     console.log(recentArr);
   return (
    <>

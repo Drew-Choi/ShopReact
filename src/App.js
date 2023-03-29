@@ -3,17 +3,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/alt-text */
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Navbar, Container, Nav, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import image1 from './img/bg.png';
 import pdInfos from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
-import Detail1 from './routes/detail1.js';
 import axios from 'axios';
 import Cart from './routes/Cart';
 import RecentPd from './components/RecentPd';
 import { useQuery } from 'react-query';
+
+const Detail1 = lazy(() => import('./routes/detail1'));
 
 //ContextAPI 만들기 1.
 // export let Context1 = createContext();
@@ -229,7 +230,9 @@ function App() {
           path="/detail1/:id"
           element={
             //ContextAPI 만들기 2. 공유하고 싶은 state를 value에 넣어준다.
-            <Detail1 pdInfos={pdInfosArr}></Detail1>
+            <Suspense fallback={<div>로딩중임</div>}>
+              <Detail1 pdInfos={pdInfosArr}></Detail1>
+            </Suspense>
           }
         />
 
