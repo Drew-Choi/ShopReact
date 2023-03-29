@@ -1,29 +1,33 @@
 import { useState } from "react";
 import './recentPd.css';
 
-export default function RecentPd() {
+export default function RecentPd({pdInfosArr}) {
+  
+  let getWatched = localStorage.getItem("watched")
+  getWatched = JSON.parse(getWatched)
 
-  const [recentArr] = useState([])
+  const [watchedList, setWatchedList] = useState(getWatched)
 
-  for(let i = 0; i < localStorage.length; i += 1){
-    let localFindKey = localStorage.key(i);
-    let localGetItem = localStorage.getItem(localFindKey);
-    let localGetItemParse = JSON.parse(localGetItem);
-    recentArr.push(localGetItemParse);
-    
+  const deleteRecentList = (el) => {
+    let copy = [...watchedList]
+    let finderIndex = copy.findIndex((e) => e === el)
+    copy.splice(finderIndex, 1)
+    localStorage.setItem("watched", JSON.stringify(copy))
+    setWatchedList(copy)
   }
-    console.log(recentArr);
+
   return (
    <>
      <div className="recentMenu_container">
       <h6>최근 본 상품</h6>
-      { recentArr.map((el, index) => {
+      { watchedList.map((el, index) => {
+        let finder = pdInfosArr.find((e) => e.PK === el)
         return(
         <div key={index}>
-          <span className="material-symbols-outlined">close</span>
-          <img style={{display: "block"}} src={'https://codingapple1.github.io/shop/shoes' + el.PK + '.jpg'} alt="img" width="100" />
-          <h6>{el.name}</h6>
-          <p>{el.price}</p>
+          <span onClick={()=> deleteRecentList(el)} className="material-symbols-outlined">close</span>
+          <img style={{display: "block"}} src={'https://codingapple1.github.io/shop/shoes' + el + '.jpg'} alt="img" width="100" />
+          <h6>{finder.name}</h6>
+          <p>{finder.price}</p>
         </div>   
         )
       })

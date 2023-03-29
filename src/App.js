@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/alt-text */
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useEffect } from 'react';
 import { Navbar, Container, Nav, Row, Col, Button } from 'react-bootstrap';
 import './App.css';
 import image1 from './img/bg.png';
@@ -39,6 +39,10 @@ function App() {
   //result.data (가져온 데이터 정보)
   //result.isLoading (로딩중일때)
   //result.error (에러날때)
+  useEffect(() => {
+    if (localStorage.length === 0)
+      localStorage.setItem('watched', JSON.stringify([]));
+  }, []);
 
   return (
     <div className="App">
@@ -87,7 +91,7 @@ function App() {
           path="/"
           element={
             <>
-              <RecentPd />
+              <RecentPd pdInfosArr={pdInfosArr} />
               <div
                 className="main-bg"
                 style={{ backgroundImage: `url(${image1})` }}

@@ -60,8 +60,18 @@ function Detail1(props) {
     let idFinder = props.pdInfos.find((e) => e.PK === Number(id));
 
     useEffect(() => {
-      let idFinderStingify = JSON.stringify(idFinder);
-      localStorage.setItem(idFinder.PK, idFinderStingify);
+      //로컬에서 빈 배열인 키 watched를 꺼냄
+      let getLocalWatched = localStorage.getItem('watched');
+      //watched가 JSON형태로 되어 있으니 Array로 바꾸기 parse사용
+      getLocalWatched = JSON.parse(getLocalWatched);
+      //앞에 뽑아놓은 객채의 밸류를 pasrse시킨 것에 푸쉬
+      getLocalWatched.push(idFinder.PK);
+      //중복제거용 코드, new Set()은 중복을 제거해줌
+      getLocalWatched = new Set(getLocalWatched);
+      //Set을 써서 배열이 깨짐. 그래서 다시 배열화 Array.from()
+      getLocalWatched = Array.from(getLocalWatched);
+      //중복작업 마무리되면 로컬스토리지에 추가
+      localStorage.setItem('watched', JSON.stringify(getLocalWatched));
     }, []);
 
     useEffect(() => {
