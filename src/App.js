@@ -13,6 +13,7 @@ import axios from 'axios';
 import Cart from './routes/Cart';
 import RecentPd from './components/RecentPd';
 import { useQuery } from 'react-query';
+import MemoChild from './components/MemoChild';
 
 const Detail1 = lazy(() => import('./routes/detail1'));
 
@@ -43,6 +44,8 @@ function App() {
     if (localStorage.length === 0)
       localStorage.setItem('watched', JSON.stringify([]));
   }, []);
+
+  const [countTest, setCountTest] = useState(0);
 
   return (
     <div className="App">
@@ -84,6 +87,12 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+
+      <MemoChild />
+      <button onClick={() => setCountTest((cur) => cur + 1)}>
+        랜더링 발생시키기
+      </button>
+      {countTest}
 
       <Routes>
         {/* 메인화면 */}
