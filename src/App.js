@@ -14,6 +14,7 @@ import Cart from './routes/Cart';
 import RecentPd from './components/RecentPd';
 import { useQuery } from 'react-query';
 import MemoChild from './components/MemoChild';
+import UseMemoChild from './components/UseMemoChild';
 
 const Detail1 = lazy(() => import('./routes/detail1'));
 
@@ -88,7 +89,8 @@ function App() {
         </Container>
       </Navbar>
 
-      <MemoChild />
+      <UseMemoChild />
+      {/* <MemoChild /> */}
       <button onClick={() => setCountTest((cur) => cur + 1)}>
         랜더링 발생시키기
       </button>
