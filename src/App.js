@@ -15,6 +15,7 @@ import RecentPd from './components/RecentPd';
 import { useQuery } from 'react-query';
 import MemoChild from './components/MemoChild';
 import UseMemoChild from './components/UseMemoChild';
+import UseTransition from './components/UseTransition';
 
 const Detail1 = lazy(() => import('./routes/detail1'));
 
@@ -89,12 +90,14 @@ function App() {
         </Container>
       </Navbar>
 
-      <UseMemoChild />
+      <UseTransition />
+
+      {/* <UseMemoChild /> */}
       {/* <MemoChild /> */}
-      <button onClick={() => setCountTest((cur) => cur + 1)}>
+      {/* <button onClick={() => setCountTest((cur) => cur + 1)}>
         랜더링 발생시키기
       </button>
-      {countTest}
+      {countTest} */}
 
       <Routes>
         {/* 메인화면 */}

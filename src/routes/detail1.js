@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/alt-text */
 
 import { useEffect, useState, lazy } from 'react';
-import { useParams, Link, json } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { pushCartData } from '../store/cartDataSlice';
