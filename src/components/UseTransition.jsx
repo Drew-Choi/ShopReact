@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useTransition } from 'react'
+import React, { useState, useTransition, useDeferredValue } from 'react'
 
 export default function UseTransition() {
 
   const [name, setName] = useState('')
   const [isPending, startTransition] = useTransition()
+  // let state = useDeferredValue(name)
 
   const arr = new Array(10000).fill(0)
 
@@ -20,7 +21,7 @@ export default function UseTransition() {
       {  
         //useTransition에서 isPending은 작업 중일때 true를 반환함
         //그래서 아래와 같이 작업 중일때 로딩중이라는 글짜를 띄울 수 있다.
-        isPending ? '로딩 중' :
+        isPending ? "로딩 중" :
         arr.map((el, index)=> {
           return <div key={index}>{name}</div>
         })
