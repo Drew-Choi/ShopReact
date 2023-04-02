@@ -101,7 +101,14 @@ function App() {
         랜더링 발생시키기
       </button>
       {countTest} */}
+      {
+        try {
 
+        } catch (err) {
+          console.error(err);
+          console.log('실패');
+        }
+      }
       <Routes>
         {/* 메인화면 */}
         <Route
@@ -241,6 +248,7 @@ function App() {
               >
                 버튼
               </button>
+              <br />
               {mainChartBtn}
             </>
           }
