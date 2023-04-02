@@ -28,6 +28,26 @@ function App() {
   let navigate = useNavigate();
   let [mainChartBtn, setMainChartBtn] = useState(1);
   let [재고] = useState([10, 11, 12]);
+  const [serverResData, setServerResData] = useState([]);
+
+  useEffect(() => {
+    serverData();
+  }, []);
+
+  const serverData = async () => {
+    try {
+      const res = await axios.get('http://localhost:4000/product', {
+        method: 'GET',
+      });
+      console.log(res.data);
+      let copy = [...res.data];
+      await setServerResData((cur) => copy);
+      console.log(serverResData);
+    } catch (err) {
+      console.error(err);
+      console.log('실패');
+    }
+  };
 
   let result = useQuery('data', () => {
     return (
@@ -101,14 +121,7 @@ function App() {
         랜더링 발생시키기
       </button>
       {countTest} */}
-      {
-        try {
-
-        } catch (err) {
-          console.error(err);
-          console.log('실패');
-        }
-      }
+      {}
       <Routes>
         {/* 메인화면 */}
         <Route
