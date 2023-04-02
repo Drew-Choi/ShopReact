@@ -1,10 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import './recentPd.css';
 
-export default function RecentPd({pdInfosArr}) {
-  
-  let getWatched = localStorage.getItem("watched")
-  getWatched = JSON.parse(getWatched)
+export default function RecentPd({pdInfosArr, getWatched}) {
 
   const [watchedList, setWatchedList] = useState(getWatched)
 

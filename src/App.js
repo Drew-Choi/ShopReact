@@ -47,6 +47,9 @@ function App() {
       localStorage.setItem('watched', JSON.stringify([]));
   }, []);
 
+  let watchedCopy = localStorage.getItem('watched');
+  const [getWatched, setGetWatched] = useState(JSON.parse(watchedCopy));
+
   const [countTest, setCountTest] = useState(0);
 
   return (
@@ -105,7 +108,7 @@ function App() {
           path="/"
           element={
             <>
-              <RecentPd pdInfosArr={pdInfosArr} />
+              <RecentPd pdInfosArr={pdInfosArr} getWatched={getWatched} />
               <div
                 className="main-bg"
                 style={{ backgroundImage: `url(${image1})` }}

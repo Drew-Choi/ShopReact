@@ -2,9 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(cookieParser());
 app.use(
@@ -29,4 +30,10 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`${PORT}포트에서 서버 실행 중 입니다.`);
+});
+
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
 });
